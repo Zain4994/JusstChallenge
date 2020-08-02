@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jusst_challenge/src/core/api/api_provider.dart';
 import 'package:jusst_challenge/src/core/api/local_storage_provider.dart';
+import 'package:jusst_challenge/src/core/repository.dart';
 import 'package:jusst_challenge/src/core/resources_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -23,6 +24,14 @@ List<SingleChildWidget> independentServices(
   ];
 }
 
-List<SingleChildWidget> dependentServices() => [];
+List<SingleChildWidget> dependentServices() => [
+
+  Provider<Repository>(
+    create: (BuildContext context) {
+      return Repository(Provider.of(context, listen: false),
+          Provider.of(context, listen: false));
+    },
+  ),
+];
 
 List<SingleChildWidget> uiConsumableProviders = [];

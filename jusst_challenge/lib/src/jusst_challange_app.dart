@@ -2,7 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:jusst_challenge/src/core/app_localizations.dart';
-import 'package:jusst_challenge/src/di/providers_setup.dart';
+import 'package:jusst_challenge/src/providers/providers_setup.dart';
 import 'package:jusst_challenge/src/resources/app_contstants.dart';
 import 'package:jusst_challenge/src/resources/colors_palette.dart';
 import 'package:jusst_challenge/src/router.dart';
