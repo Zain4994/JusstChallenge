@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
     return BaseWidget<HomeScreenModel>(
       model: HomeScreenModel(Provider.of(context, listen: false)),
       onModelReady: (model, context) async {
+        model.initData();
       },
       widgetBuilder:
           (BuildContext context, HomeScreenModel model, Widget child) {
