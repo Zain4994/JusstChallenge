@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jusst_challenge/src/core/base_widget.dart';
 import 'package:jusst_challenge/src/screens/home_screen/home_screen_model.dart';
-import 'package:jusst_challenge/src/ui_component/jusst_challenge_overlay.dart';
+import 'package:jusst_challenge/src/ui_component/jusst_challenge_overlay/jusst_challenge_overlay.dart';
 import 'package:jusst_challenge/src/ui_component/meta_data_view.dart';
 import 'package:provider/provider.dart';
 
@@ -23,10 +23,12 @@ class HomeScreen extends StatelessWidget {
               alignment: AlignmentDirectional.center,
               children: <Widget>[
                 MetaDataView(model.currentMetaData, model.currentPlaybackState),
-                JusstChallengeOverlay(
-                    model.resourcesProvider
-                        .getString(context, "system_is_not_ready"),
-                    model.currentSystemState),
+                JusstChallengeOverlay(text: model.resourcesProvider
+                    .getString(context, "system_is_not_ready"), systemState: model.currentSystemState, overlayType: OverlayType.System,),
+                Align(
+                  alignment: AlignmentDirectional.topCenter,
+                  child: JusstChallengeOverlay(volume: model.currentVolume, overlayType: OverlayType.Volume,)
+                ),
               ],
             ),
           ),

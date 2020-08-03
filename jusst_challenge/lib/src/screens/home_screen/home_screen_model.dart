@@ -12,6 +12,10 @@ class HomeScreenModel extends BaseModel {
   HomeScreenModel(ResourcesProvider resourcesProvider)
       : super(resourcesProvider);
 
+  /// Init [IOWebSocketChannel] to connect with jusst challenge url.
+  var channel =
+  IOWebSocketChannel.connect("wss://challenge.jusst.engineering/ws");
+
   /// The current [State] coming from [WebSocketChannel].
   State _currentState;
 
@@ -33,9 +37,11 @@ class HomeScreenModel extends BaseModel {
   /// Get [_currentPlaybackState] value to use it in [HomeScreen].
   get currentPlaybackState => _currentPlaybackState;
 
-  /// Init [IOWebSocketChannel] to connect with jusst challenge url.
-  var channel =
-      IOWebSocketChannel.connect("wss://challenge.jusst.engineering/ws");
+  /// Volume value inside the coming [State].
+  int _currentVolume;
+
+  /// Get [_currentVolume] value to use it in [HomeScreen].
+  get currentVolume => _currentVolume;
 
   void initData() {
     channel.stream.listen((message) {
@@ -53,6 +59,8 @@ class HomeScreenModel extends BaseModel {
         _currentPlaybackState = _currentState.playback;
       }
 
+      _currentVolume = _currentState.volume;
+
       print("------------------------------------");
       print(message);
       print("playback is: ${_currentState.playback}");
@@ -68,4 +76,5 @@ class HomeScreenModel extends BaseModel {
       notifyListeners();
     });
   }
+
 }
