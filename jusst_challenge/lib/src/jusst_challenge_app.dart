@@ -65,7 +65,6 @@ class JusstChallangeApp extends StatelessWidget {
         ],
         supportedLocales: [
           Locale('en', ''),
-          Locale('ar', ''),
         ],
         localeListResolutionCallback: selectAppLanguage,
       ),
