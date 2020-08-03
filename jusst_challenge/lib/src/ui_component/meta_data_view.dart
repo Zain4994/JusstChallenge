@@ -12,7 +12,10 @@ class MetaDataView extends StatelessWidget {
   /// if the value is [PlaybackState.inactive] there is no icon to show.
   final PlaybackState playbackState;
 
-  MetaDataView(this.metaData, this.playbackState);
+  /// The current playback position.
+  final int playbackPosition;
+
+  MetaDataView(this.metaData, this.playbackState, this.playbackPosition);
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +51,21 @@ class MetaDataView extends StatelessWidget {
               ),
             ),
             _buildPlaybackArrow(),
+            _buildProgressBar(),
+            Spacer(),
           ],
         ),
       );
     } else {
-      return Container();
+      return Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
+      );
     }
   }
 
+  /// Build playback icon view.
   Widget _buildPlaybackArrow() {
     if (playbackState != null && playbackState != PlaybackState.inactive) {
       return Icon(
@@ -68,5 +78,23 @@ class MetaDataView extends StatelessWidget {
       return Container();
     }
   }
-}
 
+  /// Build progress bar view.
+  Widget _buildProgressBar() {
+    return SliderTheme(
+      child: Slider(
+        value: playbackPosition.toDouble(),
+        min: 0,
+        max: metaData.duration.toDouble(),
+        onChanged: (point) async {
+        },
+      ),
+      data: SliderThemeData(
+        thumbColor: Colors.white,
+        trackHeight: 8,
+        thumbShape: RoundSliderThumbShape(
+            enabledThumbRadius: 12),
+      ),
+    );
+  }
+}

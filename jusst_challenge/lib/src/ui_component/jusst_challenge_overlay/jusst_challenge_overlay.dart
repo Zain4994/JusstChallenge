@@ -30,36 +30,37 @@ class JusstChallengeOverlay extends StatelessWidget {
       widgetBuilder: (BuildContext context, JusstChallengeOverlayModel model,
           Widget child) {
         if (overlayType == OverlayType.System) {
-          return _buildOverlay(200, MediaQuery.of(context).size.width, text,
-              systemState != SystemState.ready);
+          return _buildOverlay(MediaQuery.of(context).size.width, text,
+              systemState != SystemState.ready, overlayType);
         } else {
           if(volume != null && model.currentVolume != volume){
             model.setCurrentVolume(volume);
           }
-          return _buildOverlay(
-              100, 100, volume.toString(), !model.shouldShowVolumeOverlay);
+          return _buildOverlay(150, text + " " + model.currentVolume.toString(), !model.shouldShowVolumeOverlay, overlayType);
         }
       },
     );
   }
 
   /// Build the main overlay view.
-  Widget _buildOverlay(
-      double height, double width, String text, bool isVisible) {
+  Widget _buildOverlay(double width, String text, bool isVisible, OverlayType overlayType) {
     return Visibility(
       visible: isVisible,
-      child: Container(
-        height: height,
-        width: width,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        alignment: AlignmentDirectional.center,
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.5),
-          borderRadius: BorderRadius.all(Radius.circular(22)),
-        ),
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 20),
+      child: Align(
+        alignment: overlayType == OverlayType.System ? AlignmentDirectional.bottomCenter : AlignmentDirectional.topCenter ,
+        child: Container(
+          height: 100,
+          width: width,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          alignment: AlignmentDirectional.center,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.5),
+            borderRadius: BorderRadius.all(Radius.circular(22)),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );

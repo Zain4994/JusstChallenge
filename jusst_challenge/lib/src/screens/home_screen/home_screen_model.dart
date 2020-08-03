@@ -43,6 +43,12 @@ class HomeScreenModel extends BaseModel {
   /// Get [_currentVolume] value to use it in [HomeScreen].
   get currentVolume => _currentVolume;
 
+  /// Playback position value inside the coming [State].
+  int _playbackPosition;
+
+  /// Get [_playbackPosition] value to use it in [HomeScreen].
+  get playbackPosition => _playbackPosition;
+
   void initData() {
     channel.stream.listen((message) {
       _currentState = State.fromJson(jsonDecode(message));
@@ -60,6 +66,10 @@ class HomeScreenModel extends BaseModel {
       }
 
       _currentVolume = _currentState.volume;
+
+      if (_currentState.playbackPosition != null) {
+        _playbackPosition = _currentState.playbackPosition;
+      }
 
       print("------------------------------------");
       print(message);

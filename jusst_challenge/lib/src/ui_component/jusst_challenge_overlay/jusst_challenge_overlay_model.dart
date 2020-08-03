@@ -20,7 +20,7 @@ class JusstChallengeOverlayModel extends BaseModel {
   /// The duration length to hide volume overlay.
   var duration = Duration(seconds: 3);
 
-  /// A Timer to countdown the [duration] and hide volume overlay.
+  /// A timer to countdown the [duration] and hide volume overlay.
   Timer timer;
 
   /// Hide volume overlay after 3 seconds.

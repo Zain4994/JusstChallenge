@@ -20,14 +20,22 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           body: SafeArea(
             child: Stack(
+              fit: StackFit.expand,
               alignment: AlignmentDirectional.center,
               children: <Widget>[
-                MetaDataView(model.currentMetaData, model.currentPlaybackState),
-                JusstChallengeOverlay(text: model.resourcesProvider
-                    .getString(context, "system_is_not_ready"), systemState: model.currentSystemState, overlayType: OverlayType.System,),
-                Align(
-                  alignment: AlignmentDirectional.topCenter,
-                  child: JusstChallengeOverlay(volume: model.currentVolume, overlayType: OverlayType.Volume,)
+                MetaDataView(model.currentMetaData, model.currentPlaybackState,
+                    model.playbackPosition),
+                JusstChallengeOverlay(
+                  text: model.resourcesProvider
+                      .getString(context, "system_is_not_ready"),
+                  systemState: model.currentSystemState,
+                  overlayType: OverlayType.System,
+                ),
+                JusstChallengeOverlay(
+                  text: model.resourcesProvider
+                      .getString(context, "volume"),
+                  volume: model.currentVolume,
+                  overlayType: OverlayType.Volume,
                 ),
               ],
             ),
