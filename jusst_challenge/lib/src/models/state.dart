@@ -16,7 +16,7 @@ class State {
   final PlaybackState playback;
   final int volume;
   final BluetoothState bluetooth;
-  final MetaData metadata;
+  final MetaDataModel metadata;
   final int playbackPosition;
 
   State({
