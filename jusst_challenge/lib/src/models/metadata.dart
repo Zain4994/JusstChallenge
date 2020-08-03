@@ -12,6 +12,6 @@ class MetaDataModel {
   MetaDataModel({this.title, this.artist, this.coverArt, this.duration});
 
   factory MetaDataModel.fromJson(Map<String, dynamic> json) =>
-      _$MetaDataFromJson(json);
-  Map<String, dynamic> toJson() => _$MetaDataToJson(this);
+      _$MetaDataModelFromJson(json);
+  Map<String, dynamic> toJson() => _$MetaDataModelToJson(this);
 }
