@@ -19,7 +19,7 @@ class JusstChallangeApp extends StatelessWidget {
     return MultiProvider(
       providers: appProviders(sharedPreferences),
       child: MaterialApp(
-        title: 'Test App',
+        title: 'Jusst Challange App',
         themeMode: ThemeMode.light,
         // Change it as you want
         initialRoute: RoutePaths.HomeScreen,
