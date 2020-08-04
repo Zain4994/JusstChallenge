@@ -11,6 +11,10 @@ class Router {
         return CupertinoPageRoute(
             builder: (_) => HomeScreen(),
             settings: RouteSettings(name: RoutePaths.HomeScreen));
+      default:
+        return CupertinoPageRoute(
+          builder: (_) => HomeScreen(),
+        );
     }
   }
 }
