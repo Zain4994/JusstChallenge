@@ -49,40 +49,37 @@ class HomeScreenModel extends BaseModel {
   /// Get [_playbackPosition] value to use it in [HomeScreen].
   get playbackPosition => _playbackPosition;
 
+  /// Init the [IOWebSocketChannel] to listen from specific url.
+  /// Save every message coming in the socket as a [State].
   void initData() {
     channel.stream.listen((message) {
+      // Save every message as a [State].
       _currentState = State.fromJson(jsonDecode(message));
 
+      // Save the system state.
       if (_currentState.system != null) {
         _currentSystemState = _currentState.system;
       }
 
+      // Save the metadata.
       if (_currentState.metadata != null) {
         _currentMetaData = _currentState.metadata;
       }
 
+      // Save the playback state.
       if (_currentState.playback != null) {
         _currentPlaybackState = _currentState.playback;
       }
 
+      // Save the volume.
       _currentVolume = _currentState.volume;
 
+      // Save the playback Position.
       if (_currentState.playbackPosition != null) {
         _playbackPosition = _currentState.playbackPosition;
       }
 
-      print("------------------------------------");
-      print(message);
-      print("playback is: ${_currentState.playback}");
-      print("system is: ${_currentState.system}");
-      print("volume is: ${_currentState.volume}");
-      print("playbackPosition is: ${_currentState.playbackPosition}");
-      print("metadata is: ${_currentState.metadata}");
-      print("metadata title is: ${_currentState.metadata?.title}");
-      print("metadata artist is: ${_currentState.metadata?.artist}");
-      print("metadata coverArt is: ${_currentState.metadata?.coverArt}");
-      print("metadata duration is: ${_currentState.metadata?.duration}");
-
+      // Rebuild the screen.
       notifyListeners();
     });
   }
